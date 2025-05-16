@@ -1,0 +1,44 @@
+//assumes a linux kernel source tree and x86-64 architecture
+//Create the system call function //kernel/sys_setid.c
+ #include <linux/kernel.h>
+ #include <linux/syscalls.h>
+ #include <linux/cred.h>
+ #include <linux/sched.h>
+ #include <linux/uaccess.h> 
+ Syscall_define1(setuid, uid_t, uid){
+    Struct cred *new_creds;
+    new_creds = prepare_creds();
+       If (!new_cred)
+	   
+        return -ENOMEM;
+  new_creds->uid.val=uid;
+  new_creds->euid.val=uid;
+  new_creds->suid.val=uid;
+  new_creds->fsuid.val=uid;
+    return commit_creds(new_creds) ;
+}
+
+    Decleare it in include/linux/syscalls.h
+   asmlinkage long sys_setid(uid_t uid);
+   //Add it to the syscall table In arch/x86/entery/syscalls/
+     Syscall_64.tbl, add:
+    _NR_setid   548       common   setid
+              //make sure 548 is not already taken -adjust if needed
+           //Test with a simple program
+ #include <stdio.h>
+ #include <sys/syscall.h>
+ #include <unisted.h>
+ #define_NR_setid  548
+   Int main(){
+    uid_t uid= 1001;
+    long result = syscall(__NR_setid, uid);
+    Printf(“UID changed to %d successfully\n”, uid);
+else
+   Perror(“setid failed”);
+return 0;
+}
+
+// this is how system call works
+
+`
+
