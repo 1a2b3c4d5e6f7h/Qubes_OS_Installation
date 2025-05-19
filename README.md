@@ -1,1 +1,1 @@
-This project deals with the installation process and some concepts of Qubes OS.# Qubes_OS_Installation
+This project deals with the installation process and explainig some concepts of Qubes OS. Qubes Os  is very important linux disttribution OS because it is mainly designed for security. however installing Qubes OS on virtual machine is not recommended. The resaon Why installing it on virtual machine is not recommended disscused in the decumentation part of the project # Qubes_OS_Installation
